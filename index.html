@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>남천동 망개떡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fdf6ec;
+      --warm-brown: #7a4f2e;
+      --soft-brown: #b07d55;
+      --light-brown: #e8cfae;
+      --green: #6a8c5e;
+      --light-green: #c5d9b8;
+      --accent: #c0392b;
+      --text-dark: #3b2a1a;
+      --text-mid: #6b4c2a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(253,246,236,0.95);
+      backdrop-filter: blur(6px);
+      border-bottom: 2px solid var(--light-brown);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 40px;
+    }
+    .nav-logo {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.4rem; font-weight: 800;
+      color: var(--warm-brown);
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.9rem;
+      color: var(--text-mid); font-weight: 700;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--warm-brown); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(192,57,43,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(106,140,94,0.1) 0%, transparent 60%),
+        var(--cream);
+      padding: 100px 20px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-deco {
+      position: absolute; font-size: 120px; opacity: 0.06;
+      font-family: 'Nanum Myeongjo', serif; color: var(--warm-brown);
+      user-select: none; pointer-events: none;
+    }
+    .hero-deco.top-left { top: 60px; left: -20px; }
+    .hero-deco.bottom-right { bottom: 30px; right: -10px; }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--light-green);
+      color: var(--green);
+      font-size: 0.8rem; font-weight: 700;
+      padding: 6px 16px; border-radius: 20px;
+      margin-bottom: 20px; letter-spacing: 1px;
+    }
+    .hero-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800; line-height: 1.15;
+      color: var(--warm-brown);
+      margin-bottom: 16px;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--text-mid);
+      max-width: 480px; margin: 0 auto 36px; line-height: 1.8;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--warm-brown); color: #fff;
+      padding: 14px 32px; border-radius: 40px;
+      font-size: 1rem; font-weight: 700;
+      text-decoration: none; transition: transform 0.2s, background 0.2s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--warm-brown);
+      padding: 14px 32px; border-radius: 40px;
+      font-size: 1rem; font-weight: 700;
+      text-decoration: none; border: 2px solid var(--warm-brown);
+      transition: transform 0.2s, background 0.2s, color 0.2s; cursor: pointer;
+    }
+    .btn-secondary:hover { background: var(--warm-brown); color: #fff; transform: translateY(-2px); }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 90px 20px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 2px;
+      color: var(--green); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; color: var(--warm-brown);
+      margin-bottom: 16px; line-height: 1.2;
+    }
+    .section-desc {
+      color: var(--text-mid); line-height: 1.9; font-size: 1rem;
+      max-width: 600px;
+    }
+    .divider {
+      width: 48px; height: 4px;
+      background: var(--light-brown); border-radius: 2px;
+      margin: 18px 0 36px;
+    }
+
+    /* ── STORY ── */
+    #story { background: #fff; }
+    .story-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .story-img-placeholder {
+      width: 100%; aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--light-brown) 0%, var(--light-green) 100%);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px; position: relative; overflow: hidden;
+    }
+    .story-img-placeholder::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.3), transparent 60%);
+    }
+    .story-points { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .story-point {
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .story-icon {
+      width: 36px; height: 36px; min-width: 36px;
+      background: var(--light-brown); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .story-point-text { font-size: 0.95rem; color: var(--text-mid); line-height: 1.6; }
+    .story-point-text strong { color: var(--text-dark); }
+
+    /* ── MENU ── */
+    #menu { background: var(--cream); }
+    .menu-controls {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+    }
+    .menu-filter-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 18px; border-radius: 30px; border: 2px solid var(--light-brown);
+      background: transparent; color: var(--text-mid);
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; font-family: 'Nanum Gothic', sans-serif;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--warm-brown); color: #fff; border-color: var(--warm-brown);
+    }
+    .add-menu-btn {
+      background: var(--green); color: #fff;
+      padding: 10px 20px; border-radius: 30px; border: none;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; font-family: 'Nanum Gothic', sans-serif;
+    }
+    .add-menu-btn:hover { background: #507a44; transform: translateY(-1px); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 22px;
+    }
+    .menu-card {
+      background: #fff; border-radius: 18px;
+      padding: 24px; position: relative;
+      box-shadow: 0 2px 16px rgba(122,79,46,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid var(--light-brown);
+    }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(122,79,46,0.15); }
+    .menu-card-icon { font-size: 40px; margin-bottom: 14px; }
+    .menu-card-name {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--text-dark); margin-bottom: 6px;
+    }
+    .menu-card-desc { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 12px; }
+    .menu-card-price {
+      font-size: 1rem; font-weight: 700; color: var(--accent);
+    }
+    .menu-card-category {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--light-green); color: var(--green);
+      font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 12px;
+    }
+    .menu-card-actions {
+      position: absolute; bottom: 14px; right: 14px;
+      display: none; gap: 6px;
+    }
+    .menu-card:hover .menu-card-actions { display: flex; }
+    .edit-btn, .del-btn {
+      width: 28px; height: 28px; border-radius: 50%; border: none;
+      cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.15s;
+    }
+    .edit-btn { background: var(--light-brown); color: var(--warm-brown); }
+    .del-btn { background: #fde8e8; color: var(--accent); }
+    .edit-btn:hover, .del-btn:hover { transform: scale(1.1); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(59,42,26,0.5); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--cream); border-radius: 24px;
+      padding: 36px; width: 100%; max-width: 480px;
+      box-shadow: 0 20px 60px rgba(59,42,26,0.25);
+    }
+    .modal h3 {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.5rem; color: var(--warm-brown); margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 700;
+      color: var(--text-mid); margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 12px 16px;
+      border: 2px solid var(--light-brown); border-radius: 12px;
+      font-size: 0.95rem; font-family: 'Nanum Gothic', sans-serif;
+      background: #fff; color: var(--text-dark);
+      transition: border-color 0.2s; outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--warm-brown);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
+    .modal-cancel {
+      padding: 12px 24px; border-radius: 30px;
+      border: 2px solid var(--light-brown); background: transparent;
+      color: var(--text-mid); font-weight: 700; cursor: pointer;
+      font-family: 'Nanum Gothic', sans-serif; font-size: 0.9rem;
+    }
+    .modal-save {
+      padding: 12px 24px; border-radius: 30px;
+      border: none; background: var(--warm-brown);
+      color: #fff; font-weight: 700; cursor: pointer;
+      font-family: 'Nanum Gothic', sans-serif; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .modal-save:hover { background: var(--accent); }
+
+    /* ── LOCATION ── */
+    #location { background: #fff; }
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .info-card {
+      background: var(--cream); border-radius: 16px;
+      padding: 24px; margin-bottom: 16px;
+      border-left: 4px solid var(--warm-brown);
+    }
+    .info-card-label { font-size: 0.78rem; font-weight: 700; color: var(--soft-brown); letter-spacing: 1px; margin-bottom: 8px; }
+    .info-card-value { font-size: 1rem; color: var(--text-dark); line-height: 1.7; font-weight: 700; }
+    .map-placeholder {
+      width: 100%; aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--light-green) 0%, var(--light-brown) 100%);
+      border-radius: 20px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 48px; color: var(--warm-brown);
+      gap: 12px;
+    }
+    .map-placeholder span { font-size: 0.9rem; font-weight: 700; color: var(--text-mid); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--warm-brown);
+      text-align: center;
+    }
+    #contact .section-label { color: var(--light-green); }
+    #contact .section-title { color: #fff; }
+    #contact .section-desc { color: var(--light-brown); margin: 0 auto 40px; }
+    #contact .divider { background: rgba(255,255,255,0.3); margin-left: auto; margin-right: auto; }
+    .contact-cards {
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px; padding: 28px 36px;
+      text-align: center; min-width: 180px;
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer; text-decoration: none; color: inherit;
+      display: block;
+    }
+    .contact-card:hover { background: rgba(255,255,255,0.22); transform: translateY(-3px); }
+    .contact-card-icon { font-size: 32px; margin-bottom: 10px; }
+    .contact-card-label { font-size: 0.8rem; color: var(--light-brown); margin-bottom: 6px; font-weight: 700; }
+    .contact-card-value { font-size: 1rem; color: #fff; font-weight: 700; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text-dark); color: var(--light-brown);
+      text-align: center; padding: 28px 20px;
+      font-size: 0.85rem; line-height: 1.8;
+    }
+    footer strong { color: var(--light-brown); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 12px 20px; }
+      .nav-links { gap: 16px; }
+      .story-grid, .location-grid { grid-template-columns: 1fr; }
+      .story-img-placeholder { display: none; }
+    }
+
+    /* ── SCROLL ANIMATION ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🍃 남천동 망개떡</div>
+  <ul class="nav-links">
+    <li><a href="#story">우리 이야기</a></li>
+    <li><a href="#menu">메뉴</a></li>
+    <li><a href="#location">오시는 길</a></li>
+    <li><a href="#contact">연락처</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-deco top-left">떡</div>
+  <div class="hero-deco bottom-right">정</div>
+  <div>
+    <div class="hero-badge">🌿 부산 수영구 남천동</div>
+    <h1 class="hero-title">정성으로 빚은<br><span>남천동 망개떡</span></h1>
+    <p class="hero-sub">할머니의 손맛을 그대로 이어받아,<br>신선한 재료와 정성으로 매일 직접 만듭니다.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">메뉴 보기 🍡</a>
+      <a href="#location" class="btn-secondary">오시는 길</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="section-inner">
+    <div class="story-grid fade-up">
+      <div class="story-img-placeholder">🍃</div>
+      <div>
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">우리 가게 이야기</h2>
+        <div class="divider"></div>
+        <p class="section-desc">
+          남천동 망개떡은 <strong>부산의 유일한 망개떡 전문 매장</strong>입니다.<br>
+          망개나무 잎의 향긋함과 쫄깃한 찹쌀떡의 조화로,
+          드실 때마다 어릴 적 추억이 떠오르는 맛을 전해드립니다.
+        </p>
+        <div class="story-points">
+          <div class="story-point">
+            <div class="story-icon">🏆</div>
+            <div class="story-point-text"><strong>부산 유일</strong> — 부산에서 유일하게 망개떡을 전문으로 하는 매장입니다.</div>
+          </div>
+          <div class="story-point">
+            <div class="story-icon">🌿</div>
+            <div class="story-point-text"><strong>신선한 망개잎</strong> — 매일 아침 신선한 재료로만 준비합니다.</div>
+          </div>
+          <div class="story-point">
+            <div class="story-icon">🤲</div>
+            <div class="story-point-text"><strong>100% 수제</strong> — 손으로 하나하나 정성껏 빚습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Menu</div>
+      <h2 class="section-title">메뉴 소개</h2>
+      <div class="divider"></div>
+      <div class="menu-controls">
+        <div class="menu-filter-group">
+          <button class="filter-btn active" onclick="filterMenu('전체')">전체</button>
+          <button class="filter-btn" onclick="filterMenu('망개떡')">망개떡</button>
+          <button class="filter-btn" onclick="filterMenu('선물세트')">선물세트</button>
+          <button class="filter-btn" onclick="filterMenu('기타')">기타</button>
+        </div>
+        <button class="add-menu-btn" onclick="openAddModal()">+ 메뉴 추가</button>
+      </div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="section-inner fade-up">
+    <div class="section-label">Location</div>
+    <h2 class="section-title">오시는 길</h2>
+    <div class="divider"></div>
+    <div class="location-grid">
+      <div>
+        <div class="info-card">
+          <div class="info-card-label">📍 주소</div>
+          <div class="info-card-value">부산광역시 수영구 남천동<br>남천동 망개떡</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">🕐 영업시간</div>
+          <div class="info-card-value">
+            평일 · 주말 오전 9시 ~ 오후 7시<br>
+            <span style="color:var(--accent); font-size:0.9rem;">* 재료 소진 시 조기 마감될 수 있습니다</span>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">🚇 교통편</div>
+          <div class="info-card-value">
+            지하철 2호선 남천역 도보 5분<br>
+            버스 정류장 남천동 하차
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">🅿️ 주차</div>
+          <div class="info-card-value">매장 근처 공영주차장 이용 가능</div>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        🗺️
+        <span>지도 준비 중</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner fade-up">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">문의 & 주문</h2>
+    <div class="divider"></div>
+    <p class="section-desc">단체 주문, 행사 주문도 환영합니다. 언제든지 연락 주세요 😊</p>
+    <div class="contact-cards">
+      <a href="tel:051-000-0000" class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-label">전화 문의</div>
+        <div class="contact-card-value">051-000-0000</div>
+      </a>
+      <a href="#" class="contact-card">
+        <div class="contact-card-icon">💬</div>
+        <div class="contact-card-label">카카오톡</div>
+        <div class="contact-card-value">@남천동망개떡</div>
+      </a>
+      <a href="#" class="contact-card">
+        <div class="contact-card-icon">📸</div>
+        <div class="contact-card-label">인스타그램</div>
+        <div class="contact-card-value">@namcheon_tteok</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>남천동 망개떡</strong><br>
+  부산광역시 수영구 남천동 · 051-000-0000<br>
+  © 2024 남천동 망개떡. All rights reserved.
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="menuModal">
+  <div class="modal">
+    <h3 id="modalTitle">메뉴 추가</h3>
+    <div class="form-group">
+      <label>메뉴 이름</label>
+      <input type="text" id="inputName" placeholder="예: 망개떡 10개입"/>
+    </div>
+    <div class="form-group">
+      <label>카테고리</label>
+      <select id="inputCategory">
+        <option value="망개떡">망개떡</option>
+        <option value="선물세트">선물세트</option>
+        <option value="기타">기타</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>가격</label>
+      <input type="text" id="inputPrice" placeholder="예: 5,000원"/>
+    </div>
+    <div class="form-group">
+      <label>설명</label>
+      <textarea id="inputDesc" placeholder="메뉴에 대한 간단한 설명을 입력하세요."></textarea>
+    </div>
+    <div class="form-group">
+      <label>이모지 아이콘</label>
+      <input type="text" id="inputIcon" placeholder="예: 🍡" maxlength="4"/>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">취소</button>
+      <button class="modal-save" onclick="saveMenu()">저장</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── 기본 메뉴 데이터 ──
+  let menuItems = [
+    { id: 1, name: '망개떡 5개입', category: '망개떡', price: '3,000원', desc: '쫄깃한 찹쌀에 팥소를 넣고 망개잎으로 감싼 전통 망개떡', icon: '🍡' },
+    { id: 2, name: '망개떡 10개입', category: '망개떡', price: '5,500원', desc: '정성껏 빚은 망개떡 10개, 선물하기에도 딱입니다', icon: '🎋' },
+    { id: 3, name: '망개떡 20개입', category: '망개떡', price: '10,000원', desc: '가족과 함께 즐기기 좋은 넉넉한 양', icon: '🌿' },
+    { id: 4, name: '선물세트 소', category: '선물세트', price: '15,000원', desc: '정성 가득 예쁜 포장으로 선물하세요', icon: '🎁' },
+    { id: 5, name: '선물세트 대', category: '선물세트', price: '28,000원', desc: '명절이나 특별한 날 딱 맞는 고급 선물세트', icon: '🎀' },
+  ];
+
+  let editId = null;
+  let currentFilter = '전체';
+
+  function renderMenu() {
+    const grid = document.getElementById('menuGrid');
+    const filtered = currentFilter === '전체'
+      ? menuItems
+      : menuItems.filter(m => m.category === currentFilter);
+
+    grid.innerHTML = filtered.map(item => `
+      <div class="menu-card">
+        <div class="menu-card-category">${item.category}</div>
+        <div class="menu-card-icon">${item.icon}</div>
+        <div class="menu-card-name">${item.name}</div>
+        <div class="menu-card-desc">${item.desc}</div>
+        <div class="menu-card-price">${item.price}</div>
+        <div class="menu-card-actions">
+          <button class="edit-btn" onclick="openEditModal(${item.id})" title="수정">✏️</button>
+          <button class="del-btn" onclick="deleteMenu(${item.id})" title="삭제">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterMenu(cat) {
+    currentFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.textContent === cat);
+    });
+    renderMenu();
+  }
+
+  function openAddModal() {
+    editId = null;
+    document.getElementById('modalTitle').textContent = '메뉴 추가';
+    document.getElementById('inputName').value = '';
+    document.getElementById('inputCategory').value = '망개떡';
+    document.getElementById('inputPrice').value = '';
+    document.getElementById('inputDesc').value = '';
+    document.getElementById('inputIcon').value = '🍡';
+    document.getElementById('menuModal').classList.add('active');
+  }
+
+  function openEditModal(id) {
+    editId = id;
+    const item = menuItems.find(m => m.id === id);
+    document.getElementById('modalTitle').textContent = '메뉴 수정';
+    document.getElementById('inputName').value = item.name;
+    document.getElementById('inputCategory').value = item.category;
+    document.getElementById('inputPrice').value = item.price;
+    document.getElementById('inputDesc').value = item.desc;
+    document.getElementById('inputIcon').value = item.icon;
+    document.getElementById('menuModal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('menuModal').classList.remove('active');
+  }
+
+  function saveMenu() {
+    const name = document.getElementById('inputName').value.trim();
+    const price = document.getElementById('inputPrice').value.trim();
+    if (!name || !price) { alert('이름과 가격을 입력해주세요!'); return; }
+
+    const newItem = {
+      id: editId || Date.now(),
+      name,
+      category: document.getElementById('inputCategory').value,
+      price,
+      desc: document.getElementById('inputDesc').value.trim() || '맛있는 망개떡',
+      icon: document.getElementById('inputIcon').value.trim() || '🍡',
+    };
+
+    if (editId) {
+      menuItems = menuItems.map(m => m.id === editId ? newItem : m);
+    } else {
+      menuItems.push(newItem);
+    }
+
+    closeModal();
+    renderMenu();
+  }
+
+  function deleteMenu(id) {
+    if (confirm('이 메뉴를 삭제할까요?')) {
+      menuItems = menuItems.filter(m => m.id !== id);
+      renderMenu();
+    }
+  }
+
+  // 모달 외부 클릭 시 닫기
+  document.getElementById('menuModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // 스크롤 애니메이션
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // 초기 렌더링
+  renderMenu();
+</script>
+</body>
+</html>
