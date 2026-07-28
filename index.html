@@ -209,6 +209,8 @@
     .menu-card-slider { position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
     .menu-card-slider img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
     .menu-card-slider img.active { opacity: 1; }
+    .menu-card-noimg { width: 100%; aspect-ratio: 4/3; border-radius: 12px; margin-bottom: 14px; background: #f5f3ee; border: 1px dashed #ddd8cc; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: #a9a294; letter-spacing: 0.5px; }
+    .menu-card-imgnote { margin: -8px 0 12px; font-size: 0.72rem; color: #a9a294; line-height: 1.4; }
     .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.7); border: none; border-radius: 50%; width: 28px; height: 28px; font-size: 14px; cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; }
     .slider-btn.prev { left: 6px; }
     .slider-btn.next { right: 6px; }
@@ -739,7 +741,7 @@
         { count: '48개(2되)', price: '60,000원' },
       ]
     },
-    { id: 25, name: '흑임자설기', category: '떡 종류', price: '1만원~', desc: '부드럽고 쫀득한 국산 찹쌀에 고소하고 영양 만점인 흑임자가 듬뿍 들어간 건강떡입니다. 다른 곳에서는 만나볼 수 없는 남천동 망개떡만의 특별한 맛이에요', images: ['images/img_png_022.png', 'images/img_jpeg_011.jpg'], images: ['images/img_png_022.png', 'images/img_jpeg_011.jpg'],
+    { id: 25, name: '흑임자설기', category: '떡 종류', price: '1만원~', desc: '부드럽고 쫀득한 국산 찹쌀에 고소하고 영양 만점인 흑임자가 듬뿍 들어간 건강떡입니다. 다른 곳에서는 만나볼 수 없는 남천동 망개떡만의 특별한 맛이에요', images: ['images/img_png_022.png', 'images/img_jpeg_011.jpg'],
       priceList: [
         { count: '8개', price: '10,000원' },
         { count: '16개', price: '20,000원' },
@@ -803,7 +805,7 @@
         { count: '30개(1되)', price: '30,000원' },
       ]
     },
-    { id: 32, name: '모두배기', category: '떡 종류', price: '1만원~', desc: '부드럽고 쫀득한 국산 찹쌀에 땅콩, 밤, 다양한 콩들이 듬뿍 들어간 맛있고 정성 가득한 영양만점 떡입니다',
+    { id: 32, name: '모두배기', category: '떡 종류', price: '1만원~', desc: '부드럽고 쫀득한 국산 찹쌀에 땅콩, 밤, 다양한 콩들이 듬뿍 들어간 맛있고 정성 가득한 영양만점 떡입니다', images: ['images/modubaegi_1.jpg', 'images/modubaegi_2.jpg'], imgNote: '이미지는 연출된 사진으로 실제 제품과 다를 수 있습니다',
       priceList: [
         { count: '8개', price: '10,000원' },
         { count: '16개', price: '20,000원' },
@@ -819,7 +821,7 @@
         { count: '20개(1되)', price: '30,000원' },
       ]
     },
-    { id: 34, name: '우리쌀 카스테라', category: '떡 종류', price: '5천원~', desc: '100% 국내산 쌀과 엄선한 좋은 재료만으로 매일 직접 구워낸 특별하고 맛있는 쌀 카스테라입니다\n\n🌾 오리지널\n⚫ 흑미\n🍃 말차\n🍫 초코', images: ['images/castella_1.png', 'images/castella_2.png'],
+    { id: 34, name: '우리쌀 카스테라', category: '떡 종류', price: '5천원~', desc: '100% 국내산 쌀과 엄선한 좋은 재료만으로 매일 직접 구워낸 특별하고 맛있는 쌀 카스테라입니다\n\n🌾 오리지널\n⚫ 흑미\n🍃 말차\n🍫 초코', images: ['images/castella_1.png', 'images/castella_2.png', 'images/castella_black_3.jpg', 'images/castella_black_1.jpg'], imgNote: '이미지는 연출된 사진으로 실제 제품과 다를 수 있습니다',
       priceList: [
         { count: '오리지널 6개', price: '5,000원' },
         { count: '오리지널 12개', price: '10,000원' },
@@ -898,7 +900,8 @@
             <div class="slider-dots">
               ${item.images.map((_, i) => `<div class="slider-dot ${i===0?'active':''}" onclick="goSlide(event,'${item.id}',${i})"></div>`).join('')}
             </div>
-          </div>` : ''}
+          </div>` : `<div class="menu-card-noimg">사진 준비 중입니다</div>`}
+          ${item.imgNote ? `<div class="menu-card-imgnote">${item.imgNote}</div>` : ''}
           <div class="menu-card-category">${item.category}</div>
           <div class="menu-card-name">${item.name}</div>
           ${item.desc ? `<div class="menu-card-desc">${item.desc.replace(/\n/g, '<br>')}</div>` : ''}
