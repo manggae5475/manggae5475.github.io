@@ -208,7 +208,11 @@
     }
     .menu-card-desc { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 12px; }
     .menu-card-slider { position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
-    .menu-card-slider img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; }
+    .menu-card-slider img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s; cursor: zoom-in; }
+    .lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img { max-width: 100%; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+    .lightbox-close { position: absolute; top: 20px; right: 24px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .menu-card-slider img.active { opacity: 1; }
     .menu-card-noimg { width: 100%; aspect-ratio: 4/3; border-radius: 12px; margin-bottom: 14px; background: #f5f3ee; border: 1px dashed #ddd8cc; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: #a9a294; letter-spacing: 0.5px; }
     .menu-card-imgnote { margin: -8px 0 12px; font-size: 0.72rem; color: #a9a294; line-height: 1.4; }
@@ -517,7 +521,7 @@
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
         <div style="border-radius:12px; overflow:hidden; border:0.5px solid #e0d5c0;">
-          <iframe src="https://www.google.com/maps?q=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%88%98%EC%98%81%EA%B5%AC%20%ED%99%A9%EB%A0%B9%EB%8C%80%EB%A1%9C499&output=embed"
+          <iframe src="https://map.naver.com/p/entry/place/13512491?c=15.00,0,0,0,dh"
             width="100%" height="320" style="border:none; display:block;"
             title="남천동 망개떡 위치" loading="lazy" allowfullscreen></iframe>
         </div>
@@ -561,6 +565,10 @@
 </footer>
 
 <!-- MODAL -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightboxImg" src="" onclick="event.stopPropagation()" />
+</div>
 <div class="modal-overlay" id="menuModal">
   <div class="modal">
     <h3 id="modalTitle">메뉴 추가</h3>
@@ -901,7 +909,7 @@
         <div class="menu-card">
           ${item.images ? `
           <div class="menu-card-slider" id="slider-${item.id}">
-            ${item.images.map((src, i) => `<img src="${src}" class="${i===0?'active':''}" />`).join('')}
+            ${item.images.map((src, i) => `<img src="${src}" class="${i===0?'active':''}" onclick="openLightbox(event,'${src}')" />`).join('')}
             <button class="slider-btn prev" onclick="slideImg(event,'${item.id}',-1)">&#8249;</button>
             <button class="slider-btn next" onclick="slideImg(event,'${item.id}',1)">&#8250;</button>
             <div class="slider-dots">
@@ -1003,6 +1011,15 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function openLightbox(e, src) {
+    e.stopPropagation();
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightboxOverlay').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightboxOverlay').classList.remove('active');
+  }
 
   function slideImg(e, id, dir) {
     e.stopPropagation();
