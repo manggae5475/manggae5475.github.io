@@ -330,6 +330,27 @@
     }
     .modal-save:hover { background: var(--accent); }
 
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.85);
+      align-items: center; justify-content: center; padding: 20px;
+      cursor: zoom-out;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+      max-width: 90vw; max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 32px;
+      color: #fff; font-size: 2.2rem; font-weight: 300;
+      background: none; border: none; cursor: pointer;
+      line-height: 1;
+    }
+    .menu-card-slider img, .story-img-placeholder img { cursor: zoom-in; }
+
     /* ── LOCATION ── */
     #location { background: #fff; }
     .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
@@ -433,7 +454,7 @@
 <section id="story">
   <div class="section-inner">
     <div class="story-grid fade-up">
-      <div class="story-img-placeholder"><img src="images/img_jpeg_001.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:20px;" alt="남천동 망개떡"/></div>
+      <div class="story-img-placeholder"><img src="images/img_jpeg_001.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:20px;" alt="남천동 망개떡" onclick="openLightbox('images/img_jpeg_001.jpg')"/></div>
       <div>
         <div class="section-label">Our Story</div>
         <h2 class="section-title">우리 가게 이야기</h2>
@@ -524,7 +545,7 @@
       </div>
       <div style="display:flex; flex-direction:column; gap:10px;">
         <div style="border-radius:12px; overflow:hidden; border:0.5px solid #e0d5c0;">
-          <iframe src="https://map.naver.com/p/entry/place/13512491?c=15.00,0,0,0,dh"
+          <iframe src="https://www.google.com/maps?q=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%98%81%EA%B5%AC+%ED%99%A9%EB%A0%B9%EB%8C%80%EB%A1%9C499&output=embed"
             width="100%" height="320" style="border:none; display:block;"
             title="남천동 망개떡 위치" loading="lazy" allowfullscreen></iframe>
         </div>
@@ -596,6 +617,12 @@
       <button class="modal-save" onclick="saveMenu()">저장</button>
     </div>
   </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+  <img id="lightboxImg" src="" alt="확대 이미지"/>
 </div>
 
 <script>
@@ -908,7 +935,7 @@
         <div class="menu-card">
           ${item.images ? `
           <div class="menu-card-slider" id="slider-${item.id}">
-            ${item.images.map((src, i) => `<img src="${src}" class="${i===0?'active':''}" />`).join('')}
+            ${item.images.map((src, i) => `<img src="${src}" class="${i===0?'active':''}" onclick="openLightbox('${src}')" />`).join('')}
             <button class="slider-btn prev" onclick="slideImg(event,'${item.id}',-1)">&#8249;</button>
             <button class="slider-btn next" onclick="slideImg(event,'${item.id}',1)">&#8250;</button>
             <div class="slider-dots">
@@ -1001,6 +1028,15 @@
   }
 
   // 모달 외부 클릭 시 닫기
+  function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox(e) {
+    if (e) e.stopPropagation();
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
   document.getElementById('menuModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
