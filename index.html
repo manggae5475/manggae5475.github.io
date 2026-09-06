@@ -420,6 +420,56 @@
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── CHUSEOK POPUP ── */
+    .cs-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(59,42,26,0.55);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .cs-overlay.active { display: flex; }
+    .cs-popup {
+      background: #fff; border-radius: 20px; width: 100%; max-width: 420px;
+      overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      animation: csIn 0.3s ease;
+    }
+    @keyframes csIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .cs-head {
+      background: var(--warm-brown); color: #fff;
+      padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .cs-head-title { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.3px; }
+    .cs-x {
+      background: none; border: none; color: #fff; font-size: 1.5rem; line-height: 1;
+      cursor: pointer; padding: 0 4px; opacity: 0.85;
+    }
+    .cs-x:hover { opacity: 1; }
+    .cs-body { padding: 22px 22px 18px; }
+    .cs-menu { font-size: 0.88rem; color: var(--text-mid); font-weight: 700; margin-bottom: 16px; line-height: 1.6; }
+    .cs-line { font-size: 0.98rem; color: var(--text-dark); font-weight: 700; line-height: 1.8; }
+    .cs-line small { display: block; font-size: 0.85rem; color: var(--text-mid); font-weight: 700; margin-top: 4px; }
+    .cs-tel { margin: 16px 0 18px; font-size: 0.95rem; font-weight: 700; color: var(--text-mid); }
+    .cs-tel a { color: var(--warm-brown); text-decoration: none; border-bottom: 1px solid var(--light-brown); }
+    .cs-btn {
+      display: block; width: 100%; padding: 14px; border: none; border-radius: 12px;
+      background: var(--warm-brown); color: #fff; font-size: 1rem; font-weight: 800;
+      cursor: pointer; font-family: inherit;
+    }
+    .cs-btn:hover { background: var(--soft-brown); }
+    .cs-foot {
+      border-top: 1px solid var(--light-brown); padding: 12px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; color: var(--text-mid); font-weight: 700;
+    }
+    .cs-foot label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .cs-foot button { background: none; border: none; color: var(--text-mid); font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.85rem; }
+    .notice-body { font-weight: 400; font-size: 0.95rem; }
+    .notice-body h4 { font-size: 1rem; color: var(--warm-brown); margin: 18px 0 8px; font-weight: 800; }
+    .notice-body ul { list-style: none; padding: 0; margin: 0; }
+    .notice-body li { padding-left: 14px; text-indent: -14px; margin-bottom: 6px; }
+    .notice-body .checks li { padding-left: 0; text-indent: 0; }
+    .notice-body p { margin-bottom: 8px; }
+    .notice-body .note { font-size: 0.88rem; color: var(--text-mid); margin-top: 16px; }
   </style>
 </head>
 <body>
@@ -573,6 +623,59 @@
     <h2 class="section-title">공지사항</h2>
     <div class="divider"></div>
     <div id="noticeList" style="max-width:700px; margin:0 auto;">
+      <div class="info-card" id="notice-chuseok">
+        <div class="info-card-label">🌕 2026.09.06</div>
+        <div class="info-card-value">
+          <p style="font-size:1.1rem; color:var(--warm-brown);">[남천동망개떡] 2026 한가위 차례 떡 &amp; 선물세트 예약 안내</p>
+          <div class="notice-body">
+            <p>결실의 계절 가을, 소중한 분들과 함께하는 뜻깊은 명절을 위해 당일 빚은 신선함과 정성을 담은 '추석 맞이 예약'을 시작합니다.</p>
+            <ul class="checks">
+              <li>✔ 방부제·인공색소 無</li>
+              <li>✔ 당일 새벽 빚은 신선한 떡만 판매</li>
+              <li>✔ 자연의 좋은 재료로 모든 속과 고물 수제 제조</li>
+            </ul>
+
+            <h4>🍂 2026 추석 메뉴 안내</h4>
+            <p><strong>1. 수제 송편 &amp; 망개떡 (단품/차례용)</strong></p>
+            <ul>
+              <li>· 수제 깨송편(1되/30개/3만원): 최상급 찹쌀에 참깨와 콩고물, 메이플 시럽으로 만든 속이 들어간 고급스러운 송편</li>
+              <li>· 수제 녹두밤송편(1되/30개/3만원): 최상급 공주밤과 녹두가 들어간 부드럽고 고급스러운 맛</li>
+              <li>· 시그니처 망개떡(1되/24개/3만원): 쫄깃한 찹쌀 피, 국내산 팥소, 망개잎 향</li>
+            </ul>
+            <p style="margin-top:12px;"><strong>2. 정갈한 차례상 떡 (제수용 설기&amp;편)</strong></p>
+            <ul>
+              <li>· 찐콩고물 설기: 좋은 콩을 쪄내 구수한 시루떡</li>
+              <li>· 마카다미아 설기: 최상급 마카다미아를 빻아 넣은 고급스러운 인기 떡</li>
+              <li>· 현미편: 현미찹쌀에 호두·땅콩·피스타치오를 올린 건강떡</li>
+              <li>· 호박 설기: 국내산 호박에 수제 쌀 카스테라 고물을 얹은 별미</li>
+              <li>· 수제 약밥: 최상급 찹쌀에 직접 만든 소스로 지은 특별한 약밥</li>
+            </ul>
+            <p style="margin-top:12px;"><strong>3. 한가위 선물세트</strong></p>
+            <ul>
+              <li>· 실속 상자(2만~6만원대): 모듬 세트(망개떡+깨송편+고급설기) / 망개떡 단품</li>
+              <li>· 보자기 포장: 예약 시 사전 요청 필수 (현금 2,000원 추가)</li>
+              <li>· 명품 함지 세트(보자기 무료 포함): 소 8만 / 중 12만 / 대 15만원</li>
+            </ul>
+
+            <h4>📌 예약 · 픽업 · 배송 안내</h4>
+            <ul>
+              <li>· 문의: <a href="tel:051-611-5475" style="color:var(--warm-brown);">051-611-5475</a></li>
+              <li>· 위치: 부산 수영구 황령대로 499 103호</li>
+              <li>· 픽업 운영: 추석 전날(작은 추석) 9월 24일(목) 오후 6시까지</li>
+              <li>· 택배 주문: 9월 17일(목) 접수분까지 (18일 최종 발송)</li>
+              <li>· 퀵 배송: 배송비 착불 / 명절 할증료 2,000원 추가 (조기 마감 가능)</li>
+            </ul>
+
+            <h4>🏠 연휴 휴무 안내</h4>
+            <ul>
+              <li>· 9월 25일(금) ~ 30일(수) 휴무, 10월 1일(목) 정상 영업</li>
+              <li>· 일정 변경 시 재공지 드리겠습니다</li>
+            </ul>
+
+            <p class="note">※ 당일 한정 수량 생산으로 조기 마감될 수 있으니 사전 예약을 권장합니다.</p>
+          </div>
+        </div>
+      </div>
       <div class="info-card">
         <div class="info-card-label">📢 2026.03.01</div>
         <div class="info-card-value">남천동 망개떡 홈페이지를 오픈하였습니다. 앞으로 잘 부탁드립니다!</div>
@@ -1072,6 +1175,70 @@
 
   // 초기 렌더링
   renderMenu();
+</script>
+
+<!-- CHUSEOK POPUP: ~9/24 예약안내 → 9/25~9/30 휴무안내 → 10/1 자동 종료 -->
+<div class="cs-overlay" id="csOverlay" onclick="if(event.target===this)closeCsPopup()">
+  <div class="cs-popup" role="dialog" aria-label="추석 예약 안내">
+    <div class="cs-head">
+      <span class="cs-head-title" id="csHeadTitle">🌕 2026 한가위 떡 &amp; 선물세트 예약 접수 중</span>
+      <button class="cs-x" aria-label="닫기" onclick="closeCsPopup()">×</button>
+    </div>
+    <div class="cs-body">
+      <div id="csBodyMain">
+        <div class="cs-menu">한가위 선물세트 · 수제 송편 · 시그니처 망개떡 · 차례상 설기</div>
+        <div class="cs-line">· 픽업: 9월 24일(목) 오후 6시까지</div>
+        <div class="cs-line">· 택배: 9월 17일(목) 접수 마감</div>
+        <div class="cs-line">· 당일 한정 생산으로 조기 마감될 수 있어요</div>
+      </div>
+      <div class="cs-tel">📞 예약 문의 <a href="tel:051-611-5475">051-611-5475</a></div>
+      <button class="cs-btn" onclick="goCsNotice()">자세히 보기</button>
+    </div>
+    <div class="cs-foot">
+      <label><input type="checkbox" id="csHideToday"> 오늘 하루 보지 않기</label>
+      <button onclick="closeCsPopup()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var now = new Date();
+    var PHASE2 = new Date('2026-09-25T00:00:00+09:00');
+    var END = new Date('2026-10-01T00:00:00+09:00');
+    if (now >= END) return;
+    if (now >= PHASE2) {
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById('csHeadTitle').textContent = '🏠 추석 연휴 휴무 안내';
+        document.getElementById('csBodyMain').innerHTML =
+          '<div class="cs-line">· 9월 25일(금) ~ 30일(수) 휴무</div>' +
+          '<div class="cs-line">· 10월 1일(목)부터 정상 영업합니다</div>' +
+          '<div class="cs-menu" style="margin:14px 0 0;">풍성하고 따뜻한 한가위 보내세요 🙏</div>';
+      });
+    }
+    var today = new Date().toISOString().slice(0,10);
+    try { if (localStorage.getItem('csPopupHide') === today) return; } catch(e){}
+    window.addEventListener('load', function(){
+      document.getElementById('csOverlay').classList.add('active');
+    });
+  })();
+  function closeCsPopup(){
+    var box = document.getElementById('csHideToday');
+    if (box && box.checked) {
+      try { localStorage.setItem('csPopupHide', new Date().toISOString().slice(0,10)); } catch(e){}
+    }
+    document.getElementById('csOverlay').classList.remove('active');
+  }
+  function goCsNotice(){
+    closeCsPopup();
+    var el = document.getElementById('notice-chuseok');
+    if (el) {
+      el.classList.add('visible');
+      var sec = document.getElementById('notice'); if (sec) sec.querySelectorAll('.fade-up').forEach(function(f){f.classList.add('visible');});
+      var y = el.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
 </script>
 </body>
 </html>
