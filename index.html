@@ -12,8 +12,13 @@
   <meta property="og:url" content="https://manggae5475.github.io" />
   <meta property="og:image" content="https://manggae5475.github.io/images/img_jpeg_001.jpg" />
   <meta name="naver-site-verification" content="4b952f8cce0c95dc5924bf8d93d0424a653300c6" />
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet"/>
-  <link href="https://hangeul.pstatic.net/hangeul_static/css/maruburiGothic.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preload" href="fonts/MaruBuri-Regular.woff2" as="font" type="font/woff2" crossorigin/>
+  <style>
+    /* 마루부리 글꼴: 홈페이지 안에 직접 넣어서 휴대폰·노트북 모두 같은 글씨체로 보이게 함 */
+    @font-face { font-family: 'MaruBuri'; src: url('fonts/MaruBuri-Regular.woff2') format('woff2'); font-weight: 100 500; font-display: swap; }
+    @font-face { font-family: 'MaruBuri'; src: url('fonts/MaruBuri-Bold.woff2') format('woff2'); font-weight: 600 900; font-display: swap; }
+  </style>
   <style>
     :root {
       --cream: #fdf6ec;
